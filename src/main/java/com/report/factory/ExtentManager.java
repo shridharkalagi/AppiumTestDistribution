@@ -13,6 +13,9 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +23,6 @@ public class ExtentManager {
 
     private static ConfigFileManager configFileManager;
     private static ExtentReports extent;
-    private static String filePath = System.getProperty("user.dir") + "/target/ExtentReports.html";
     private static CommandPrompt commandPrompt = new CommandPrompt();
 
     public synchronized static ExtentReports getExtent() {
@@ -66,7 +68,7 @@ public class ExtentManager {
     }
 
     private static ExtentHtmlReporter getHtmlReporter() {
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(filePath);
+        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(getFilePath());
         URL inputUrl = null;
         try {
             inputUrl = Thread.currentThread().getContextClassLoader().getResource("extent.xml");
@@ -119,6 +121,20 @@ public class ExtentManager {
             getExtent();
         }
         extent.setSystemInfo(parameter, value);
+    }
+
+    private static String getFilePath(){
+        Path path;
+        if(ConfigFileManager.configFileMap.containsKey("REPORT_PATH")) {
+            path = FileSystems.getDefault().getPath(configFileManager.getProperty("REPORT_PATH").toString());
+            if (!path.isAbsolute()) {
+                path = path.normalize()
+                        .toAbsolutePath();
+            }
+        }
+        else
+            path = Paths.get(System.getProperty("user.dir") + "/target/ExtentReports.html");
+        return path.toString();
     }
 
 
