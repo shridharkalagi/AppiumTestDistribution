@@ -73,6 +73,7 @@ public class DesiredCapabilityBuilder {
             }
             appPackage(desiredCapabilities);
         } else if (DeviceManager.getMobilePlatform().equals(MobilePlatform.IOS)) {
+            String version = iosDevice.getIOSDeviceProductVersion();
             appPackageBundle(desiredCapabilities);
 
             //Check if simulator.json exists and add the deviceName and OS
@@ -85,7 +86,7 @@ public class DesiredCapabilityBuilder {
                         simulatorManager.getSimulatorDetailsFromUDID(DeviceManager.getDeviceUDID(),
                                 "iOS").getOsVersion());
             }
-            if (Float.valueOf(iosDevice.getIOSDeviceProductVersion()) >= 10.0) {
+            if (Float.valueOf(version.substring(0, version.length() - 2)) >= 10.0) {
                 desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME,
                         AutomationName.IOS_XCUI_TEST);
                 desiredCapabilities.setCapability(IOSMobileCapabilityType
