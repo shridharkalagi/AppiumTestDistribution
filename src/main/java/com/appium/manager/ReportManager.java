@@ -7,6 +7,7 @@ import com.aventstack.extentreports.Status;
 import com.report.factory.ExtentTestManager;
 import org.testng.IInvokedMethod;
 import org.testng.ITestResult;
+import org.testng.TestListenerAdapter;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import static org.testng.Reporter.log;
+
 /**
  * ReportManager - Handles all Reporting activities e.g communication with ExtentManager, etc
  */
-public class ReportManager {
+public class ReportManager extends TestListenerAdapter {
 
     private TestLogger testLogger;
     private DeviceManager deviceManager;
@@ -41,6 +44,12 @@ public class ReportManager {
 
     public HashMap<String, String> endLogTestResults(ITestResult result)
             throws IOException, InterruptedException {
+        if(result.getStatus() == ITestResult.SUCCESS){
+            log(result.getName()+ "--Test method passed\n",true);
+        }
+        else if(result.getStatus() == ITestResult.FAILURE){
+            log(result.getName()+ "--Test method failed\n",true);
+        }
         return testLogger.endLog(result, deviceManager.getDeviceModel(), test);
     }
 

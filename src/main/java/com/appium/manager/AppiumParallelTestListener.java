@@ -7,16 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.testng.IClassListener;
-import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
-import org.testng.ITestClass;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.SkipException;
+import org.testng.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static org.testng.Reporter.log;
 
 public final class AppiumParallelTestListener
         implements ITestListener, IClassListener, IInvokedMethodListener, ISuiteListener {
@@ -125,6 +118,7 @@ public final class AppiumParallelTestListener
         try {
             if (testResult.getStatus() == ITestResult.SUCCESS
                     || testResult.getStatus() == ITestResult.FAILURE) {
+                //log( "--Test method failed\n");
                 reportManager.setAuthorName(method);
                 HashMap<String, String> getLogDetails = reportManager.endLogTestResults(testResult);
                 JSONObject status = getStatus(json, getExecutionStatus(testResult),
