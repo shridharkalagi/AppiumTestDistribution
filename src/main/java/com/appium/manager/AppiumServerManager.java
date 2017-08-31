@@ -61,7 +61,9 @@ public class AppiumServerManager {
         AppiumServiceBuilder builder =
                 new AppiumServiceBuilder().withAppiumJS(new File(ConfigFileManager
                         .configFileMap.get("APPIUM_JS_PATH")))
-                        .withArgument(GeneralServerFlag.LOG_LEVEL, "info").withLogFile(new File(
+                        .withArgument(GeneralServerFlag.LOG_LEVEL, "info")
+                        .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+                        .withLogFile(new File(
                         System.getProperty("user.dir") + "/target/appiumlogs/"
                                 + DeviceManager.getDeviceUDID()
                                 + "__" + methodName + ".txt"))
