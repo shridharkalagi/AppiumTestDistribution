@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="My Suite" verbose="2" parallel="methods" thread-count="2" data-provider-thread-count="2">
+    <test name="Some Workflow Tests" >
+        <classes>
+            <class name="com.appium.webtest.SampleDemo"/>
+        </classes>
+    </test>
+</suite>

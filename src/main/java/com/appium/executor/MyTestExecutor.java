@@ -190,6 +190,7 @@ public class MyTestExecutor {
             writeXmlClass(testcases, methods, xmlClasses);
             test.setXmlClasses(xmlClasses);
         }
+
         writeTestNGFile(suite);
         return suite;
     }

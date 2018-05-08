@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class LoginTest extends UserBaseTest {
+public class Login extends UserBaseTest {
 
 
     @Test public void loginTest() throws InterruptedException {

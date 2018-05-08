@@ -61,6 +61,8 @@ public final class AppiumParallelTestListener
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+
+        System.out.println("in before invocation methond 111111");
         try {
             SkipIf skip =
                     method.getTestMethod()
@@ -141,6 +143,7 @@ public final class AppiumParallelTestListener
     */
     @Override
     public void onStart(ISuite iSuite) {
+        System.out.println("on start methond");
         try {
             appiumServerManager.startAppiumServer();
         } catch (Exception e) {
@@ -201,6 +204,7 @@ public final class AppiumParallelTestListener
 
     @Override
     public void onBeforeClass(ITestClass testClass) {
+        System.out.println("in before class invocation methond 111111");
         try {
             String device = testClass.getXmlClass().getAllParameters().get("device");
             String hostName = testClass.getXmlClass().getAllParameters().get("hostName");
@@ -227,6 +231,7 @@ public final class AppiumParallelTestListener
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+        System.out.println("in test start invocation methond 111111");
         try {
             appiumDriverManager.startAppiumDriverInstance();
             reportManager.setAuthorName(iTestResult);

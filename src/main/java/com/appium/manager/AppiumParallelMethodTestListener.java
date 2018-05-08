@@ -42,6 +42,7 @@ public final class AppiumParallelMethodTestListener
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+        System.out.println("in before invocation 11111");
         SkipIf skip = getSkipIf(method);
         isSkip(skip);
 
@@ -98,6 +99,7 @@ public final class AppiumParallelMethodTestListener
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+        System.out.println("in test start 11111");
         try {
             System.out.println(Thread.currentThread().getId());
             deviceAllocationManager.allocateDevice(deviceAllocationManager.getNextAvailableDevice());
